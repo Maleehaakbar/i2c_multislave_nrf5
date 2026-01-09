@@ -1,0 +1,20 @@
+# SEGGER Embedded Studio
+Output/
+Debug/
+Release/
+*.emBuild
+*.jlink
+*.log
+
+# Build artifacts
+*.o
+*.elf
+*.hex
+*.bin
+*.map
+*.eww
+
+
+# OS files
+.DS_Store
+Thumbs.db
