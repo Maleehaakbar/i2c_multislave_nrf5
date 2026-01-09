@@ -2,6 +2,9 @@
 Output/
 Debug/
 Release/
+armgcc/
+iar/
+arm5_no_packs/
 *.emBuild
 *.jlink
 *.log
