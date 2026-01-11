@@ -53,152 +53,46 @@
 #include "app_error.h"
 #include "nrf_drv_twi.h"
 #include "nrf_delay.h"
+#include "i2c.h"
 
 
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
-
-/* TWI instance ID. */
-#define TWI_INSTANCE_ID     0
-
-#define CHIPID_REGISTER    0x0dU
-
-/**
- * Default I2C address
- */
-#define QMC5883L_I2C_ADDR_DEF  (0x0dU)
+#include "qmc5883l.h"
 
 
-/* Indicates if operation on TWI has ended. */
-static volatile bool m_xfer_done = false;
-
-/*to check failure or success in interupt handler*/
-static volatile ret_code_t nrf_result = NRF_SUCCESS;
-
-/* TWI instance. */
-static const nrf_drv_twi_t m_twi = NRF_DRV_TWI_INSTANCE(TWI_INSTANCE_ID);
-
-/* Buffer for samples read from sensor. */
-static uint8_t m_sample;
-
-/*function to write to sensor*/
-void write_to_sensor(uint8_t reg)
-{   m_xfer_done = false;
-    ret_code_t err_code;
-    err_code = nrf_drv_twi_tx(&m_twi,QMC5883L_I2C_ADDR_DEF,&reg, sizeof(reg), true);  //no stop generate,repeated start
-    APP_ERROR_CHECK(err_code);
-    while (m_xfer_done == false);
-}
-/**
- * @brief Function for handling data from sensor.
- *
- * @param[in] temp          Temperature in Celsius degrees read from sensor.
- */
-__STATIC_INLINE void data_handler(uint8_t temp)
-{
-    NRF_LOG_INFO("bytes received %x .", temp);
-}
-
-/**
- * @brief TWI events handler.
- */
-void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
-{   
-   
-    switch (p_event->type)
-    {  
-        case NRF_DRV_TWI_EVT_DONE:
-            if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_RX)
-            {
-                data_handler(m_sample);
-            }
-            nrf_result = NRF_SUCCESS;
-            m_xfer_done = true;
-            break;
-        case NRF_DRV_TWI_EVT_ADDRESS_NACK:
-          {
-            nrf_result = NRF_ERROR_NOT_FOUND;
-            m_xfer_done = true;
-          }
-          break;
-          case NRF_DRV_TWI_EVT_DATA_NACK: {
-            
-            nrf_result = NRF_ERROR_INTERNAL;
-            m_xfer_done = true;
-          }
-          break;
-
-        default:
-            break;
-    }
-}
-
-/**
- * @brief i2c initialization.
- */
-void twi_init (void)
-{
-    ret_code_t err_code;
-
-    const nrf_drv_twi_config_t twi_config = {
-       .scl                = ARDUINO_SCL_PIN,
-       .sda                = ARDUINO_SDA_PIN,
-       .frequency          = NRF_DRV_TWI_FREQ_100K,
-       .interrupt_priority = APP_IRQ_PRIORITY_HIGH,
-       .clear_bus_init     = false
-    };
-
-    err_code = nrf_drv_twi_init(&m_twi, &twi_config, twi_handler, NULL);
-    APP_ERROR_CHECK(err_code);
-
-    nrf_drv_twi_enable(&m_twi);
-
-}
-
-/**
- * @brief Function for reading data from sensor.
- */
-static void read_sensor_data()
-{   
-    write_to_sensor(CHIPID_REGISTER);
-    m_xfer_done = false;
-    
-    /* Read 1 byte from the specified address - skip 3 bits dedicated for fractional part of temperature. */
-    ret_code_t err_code = nrf_drv_twi_rx(&m_twi, QMC5883L_I2C_ADDR_DEF, &m_sample, sizeof(m_sample));
-    APP_ERROR_CHECK(err_code);
-}
 
 /**
  * @brief Function for main application entry.
  */
 int main(void)
-{
-    APP_ERROR_CHECK(NRF_LOG_INIT(NULL));
+{   
+    /*log init*/
+    APP_ERROR_CHECK(NRF_LOG_INIT(NULL));  
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 
-    NRF_LOG_INFO("\r\nTWI sensor example started.");
+    /*i2c init*/
+    twi_init();   
+    NRF_LOG_INFO("\r\n init i2c");
     NRF_LOG_FLUSH();
-    twi_init();  //i2c init
-    NRF_LOG_INFO("\r\n i2c init.");
-    NRF_LOG_FLUSH();      //flush logs before going to sleep
-   // write_to_sensor(CHIPID_REGISTER);
-
-    while (true)
+    while(true)
     {
-        nrf_delay_ms(500);
-        read_sensor_data();
-        while (m_xfer_done == false){
+      nrf_delay_ms(500);
+      APP_ERROR_CHECK(qmc5883l_get_chip_id(&m_sample));
+      while (m_xfer_done == false){
           __WFE();
         }
-        if (nrf_result!= NRF_SUCCESS)
+      NRF_LOG_INFO("\r\n wakeup event");
+      NRF_LOG_FLUSH();
+
+      if (nrf_result!= NRF_SUCCESS)
         {
           NRF_LOG_INFO("\r\n failed to recv data.");
           NRF_LOG_FLUSH();
           return 1;
         }
-        
-        NRF_LOG_FLUSH();
+ 
     }
 }
 
