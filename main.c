@@ -71,7 +71,8 @@
 int main(void)
 {   
     char buf[64];
-    uint8_t partid;
+    int16_t g_x,g_y,g_z;
+    int16_t a_x, a_y, a_z;
     /*log init*/
     APP_ERROR_CHECK(NRF_LOG_INIT(NULL));  
     NRF_LOG_DEFAULT_BACKENDS_INIT();
@@ -91,7 +92,6 @@ int main(void)
       qmc5883l_data_t data;
         if (qmc5883l_get_data(&data) == NRF_SUCCESS)
         {
-          //NRF_LOG_INFO("Magnetic data: X:%.2f mG, Y:%.2f mG, Z:%.2f mG\n", data.x, data.y, data.z);
           snprintf(buf, sizeof(buf), "Magnetic data: X:%.2f mG, Y:%.2f mG, Z:%.2f mG",data.x, data.y, data.z);
           NRF_LOG_INFO("%s", buf);
         }
@@ -108,12 +108,15 @@ int main(void)
         }
  
     }
-    #endif
-   // mpu6050_init();
+    #else
+   mpu6050_init();
    while(true)
    {
+
     nrf_delay_ms(500);
-    APP_ERROR_CHECK(mpu6050_verify_product_id(&partid));
+    APP_ERROR_CHECK(MPU6050_ReadGyro(&g_x, &g_y ,&g_z));
+    APP_ERROR_CHECK(MPU6050_ReadAcc(&a_x, &a_y, &a_z));
+
     if(nrf_result != NRF_SUCCESS)
     {
           NRF_LOG_INFO("\r\n failed to recv data.");
@@ -122,10 +125,14 @@ int main(void)
     }
     else 
     {
-      NRF_LOG_INFO("part id is %x", partid);
+      NRF_LOG_INFO("\r\n gyro data %d. %d, %d", g_x, g_y, g_z);
+      NRF_LOG_FLUSH();
+      NRF_LOG_INFO("\r\n accelro data %d. %d, %d", a_x, a_y, a_z);
       NRF_LOG_FLUSH();
     }
    }
+
+   #endif
 
 }
 
