@@ -68,24 +68,34 @@
  */
 int main(void)
 {   
+    char buf[64];
     /*log init*/
     APP_ERROR_CHECK(NRF_LOG_INIT(NULL));  
     NRF_LOG_DEFAULT_BACKENDS_INIT();
-
+  
     /*i2c init*/
     twi_init();   
     NRF_LOG_INFO("\r\n init i2c");
     NRF_LOG_FLUSH();
+
+    APP_ERROR_CHECK(qmc5883l_set_config(QMC5883L_DR_50, QMC5883L_OSR_128, QMC5883L_RNG_2));
+    APP_ERROR_CHECK(qmc5883l_set_mode(QMC5883L_MODE_CONTINUOUS));
+
     while(true)
     {
       nrf_delay_ms(500);
-      APP_ERROR_CHECK(qmc5883l_get_chip_id(&m_sample));
-      while (m_xfer_done == false){
-          __WFE();
+      qmc5883l_data_t data;
+        if (qmc5883l_get_data(&data) == NRF_SUCCESS)
+        {
+          //NRF_LOG_INFO("Magnetic data: X:%.2f mG, Y:%.2f mG, Z:%.2f mG\n", data.x, data.y, data.z);
+          snprintf(buf, sizeof(buf), "Magnetic data: X:%.2f mG, Y:%.2f mG, Z:%.2f mG",data.x, data.y, data.z);
+          NRF_LOG_INFO("%s", buf);
         }
-      NRF_LOG_INFO("\r\n wakeup event");
-      NRF_LOG_FLUSH();
-
+        else
+        {
+            NRF_LOG_INFO("Could not read QMC5883L data\n");
+        }
+        NRF_LOG_FLUSH();
       if (nrf_result!= NRF_SUCCESS)
         {
           NRF_LOG_INFO("\r\n failed to recv data.");

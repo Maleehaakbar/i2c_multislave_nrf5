@@ -37,6 +37,9 @@
 #include "qmc5883l.h"
 #include "nrf_drv_twi.h"
 #include "i2c.h"
+#include "nrf_log.h"
+#include "nrf_log_ctrl.h"
+#include "nrf_log_default_backends.h"
 
 #define I2C_FREQ_HZ 100000 // 100kHz
 
@@ -114,14 +117,16 @@ ret_code_t qmc5883l_set_config(qmc5883l_odr_t odr, qmc5883l_osr_t osr, qmc5883l_
 
     uint8_t v;
     ret_code_t ret;
-    read_reg(REG_CTRL1, &v,1);
+    read_reg(REG_CTRL1, &v,1); //read
     range = rng;
     ret = write_reg(REG_FBR, 1); // Define set/reset period
      if(ret!= NRF_SUCCESS)
     {
         return ret;
     }
-    ret = write_reg(REG_CTRL1,(v & 0x03) | ((odr & 3) << 2) | ((rng & 1) << 4) | ((osr & 3) << 6));
+
+    /*configure all parameters except mode ,mode bits 0-1*/  
+    ret = write_reg(REG_CTRL1,(v & 0x03) | ((odr & 3) << 2) | ((rng & 1) << 4) | ((osr & 3) << 6)); 
 
     return ret;
 }
@@ -166,11 +171,11 @@ ret_code_t qmc5883l_data_ready(bool *ready)
     return ret;
 }
 
-/*ret_code_t qmc5883l_get_raw_data(qmc5883l_raw_data_t *raw)
+ret_code_t qmc5883l_get_raw_data(qmc5883l_raw_data_t *raw)
 {
     CHECK_ARG(raw);
     ret_code_t ret;
-    ret = read_reg(REG_XOUT_L, raw, 6);
+    ret = read_reg(REG_XOUT_L, (uint8_t*)raw, 6);
     if (ret != NRF_SUCCESS)
        NRF_LOG_INFO("Could not read data register, err = %d", ret);
     return ret;
@@ -180,9 +185,12 @@ ret_code_t qmc5883l_raw_to_mg(qmc5883l_raw_data_t *raw, qmc5883l_data_t *data)
 {
     CHECK_ARG(raw && data);
     ret_code_t ret;
-    float f = (range == QMC5883L_RNG_2 ? 2000.0 : 8000.0) / 32768;
+   
+    /* divide by int16 max value to compute full scale factor*/
+    float f = (range == QMC5883L_RNG_2 ? 2000.0 : 8000.0) / 32768;  
 
-    data->x = raw->x * f;
+    /* raw data*(sensitivity/range */
+    data->x = raw->x * f; 
     data->y = raw->y * f;
     data->z = raw->z * f;
 
@@ -201,8 +209,8 @@ ret_code_t qmc5883l_get_raw_temp(int16_t *temp)
 {
     CHECK_ARG(temp);
     
-    ret_code_t ret = read_reg(REG_TOUT_L, temp, 2);
+    ret_code_t ret = read_reg(REG_TOUT_L, (uint8_t*)temp, 2);
     if (ret != NRF_SUCCESS)
          NRF_LOG_INFO("Could not read TOUT register, err = %d", ret);
     return ret;
-}*/
+}

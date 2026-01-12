@@ -45,9 +45,10 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
         case NRF_DRV_TWI_EVT_DONE:
             if (p_event->xfer_desc.type == NRF_DRV_TWI_XFER_RX)
             {
-                data_handler(m_sample);
+               // data_handler(m_sample);
+                nrf_result = NRF_SUCCESS;
             }
-            nrf_result = NRF_SUCCESS;
+           
             m_xfer_done = true;
             break;
         case NRF_DRV_TWI_EVT_ADDRESS_NACK:
@@ -92,10 +93,14 @@ void twi_init (void)
 }
 
 ret_code_t write_reg(uint8_t reg, uint8_t val)
-{ 
+{   
+    ret_code_t err_code;
     uint8_t value[2] ={reg, val};
     m_xfer_done = false;
-    return  nrf_drv_twi_tx(&m_twi,QMC5883L_I2C_ADDR_DEF, value, sizeof(value), false); 
+    err_code = nrf_drv_twi_tx(&m_twi,QMC5883L_I2C_ADDR_DEF, value, sizeof(value), false); 
+    while (m_xfer_done == false);
+    return err_code;
+    
 }
 
 ret_code_t read_reg(uint8_t reg, uint8_t *val , uint8_t size)
@@ -105,5 +110,10 @@ ret_code_t read_reg(uint8_t reg, uint8_t *val , uint8_t size)
     err_code = nrf_drv_twi_tx(&m_twi,QMC5883L_I2C_ADDR_DEF,&reg, sizeof(reg), true); 
     APP_ERROR_CHECK(err_code);
     while (m_xfer_done == false);
-    return nrf_drv_twi_rx(&m_twi, QMC5883L_I2C_ADDR_DEF, val, size);
+  
+    m_xfer_done = false;
+    err_code = nrf_drv_twi_rx(&m_twi, QMC5883L_I2C_ADDR_DEF, val, size);
+    APP_ERROR_CHECK(err_code);
+    while (m_xfer_done == false);
+    return err_code;
 }

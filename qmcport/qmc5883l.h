@@ -207,7 +207,7 @@ ret_code_t qmc5883l_data_ready(bool *ready);
  * @param[out] raw Raw magnetic data
  * @return `ESP_OK` on success
  */
-//ret_code_t qmc5883l_get_raw_data(qmc5883l_raw_data_t *raw);
+ret_code_t qmc5883l_get_raw_data(qmc5883l_raw_data_t *raw);
 
 /**
  * @brief Convert raw magnetic data to milligauss
@@ -217,7 +217,7 @@ ret_code_t qmc5883l_data_ready(bool *ready);
  * @param[out] data Magnetic data in mG
  * @return `ESP_OK` on success
  */
-//ret_code_t qmc5883l_raw_to_mg(qmc5883l_raw_data_t *raw, qmc5883l_data_t *data);
+ret_code_t qmc5883l_raw_to_mg(qmc5883l_raw_data_t *raw, qmc5883l_data_t *data);
 
 /**
  * @brief Read magnetic data in milligauss
@@ -226,7 +226,7 @@ ret_code_t qmc5883l_data_ready(bool *ready);
  * @param[out] data Magnetic data in mG
  * @return `ESP_OK` on success
  */
-//ret_code_t qmc5883l_get_data(qmc5883l_data_t *data);
+ret_code_t qmc5883l_get_data(qmc5883l_data_t *data);
 
 /**
  * @brief Read raw temperature data (see datasheet)
@@ -235,7 +235,7 @@ ret_code_t qmc5883l_data_ready(bool *ready);
  * @param[out] temp Raw temperature data
  * @return `ESP_OK` on success
  */
-//ret_code_t qmc5883l_get_raw_temp(int16_t *temp);
+ret_code_t qmc5883l_get_raw_temp(int16_t *temp);
 
 #ifdef __cplusplus
 }
