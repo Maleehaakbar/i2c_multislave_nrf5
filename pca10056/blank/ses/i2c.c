@@ -10,7 +10,6 @@
 
 #define TWI_INSTANCE_ID     0
 
-#define QMC5883L_I2C_ADDR_DEF  (0x0dU)
 /* Indicates if operation on TWI has ended. */
 volatile bool m_xfer_done = false;
 
@@ -97,7 +96,7 @@ ret_code_t write_reg(uint8_t reg, uint8_t val)
     ret_code_t err_code;
     uint8_t value[2] ={reg, val};
     m_xfer_done = false;
-    err_code = nrf_drv_twi_tx(&m_twi,QMC5883L_I2C_ADDR_DEF, value, sizeof(value), false); 
+    err_code = nrf_drv_twi_tx(&m_twi,SLAVE_ADDRESS, value, sizeof(value), false); 
     while (m_xfer_done == false);
     return err_code;
     
@@ -106,14 +105,24 @@ ret_code_t write_reg(uint8_t reg, uint8_t val)
 ret_code_t read_reg(uint8_t reg, uint8_t *val , uint8_t size)
 {   
     ret_code_t err_code;
+    /*set the flag t false , as interrupt handler make it true when transfer completes.*/
     m_xfer_done = false;
-    err_code = nrf_drv_twi_tx(&m_twi,QMC5883L_I2C_ADDR_DEF,&reg, sizeof(reg), true); 
+
+    /*init write the register address from where data will be read with repeated start*/
+    err_code = nrf_drv_twi_tx(&m_twi,SLAVE_ADDRESS,&reg, sizeof(reg), true); 
     APP_ERROR_CHECK(err_code);
+
+    /*wait till the write transaction completes*/
     while (m_xfer_done == false);
   
+    /*again set flag to false for receive data*/
     m_xfer_done = false;
-    err_code = nrf_drv_twi_rx(&m_twi, QMC5883L_I2C_ADDR_DEF, val, size);
+
+    /*init read*/
+    err_code = nrf_drv_twi_rx(&m_twi, SLAVE_ADDRESS, val, size);
     APP_ERROR_CHECK(err_code);
+
+    /*wait until transfer is done*/
     while (m_xfer_done == false);
     return err_code;
 }

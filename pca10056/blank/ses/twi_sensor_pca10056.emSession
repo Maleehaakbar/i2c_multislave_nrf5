@@ -3,20 +3,17 @@
  <Bookmarks/>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
   <BreakpointListItem trigger="" line="43" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="2" filename="i2c.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="103" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="4" filename="../../../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="83" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="4" filename="../../../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="91" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="89" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="4" filename="../../../main.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="97" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="179" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="2" filename="../../../qmcport/qmc5883l.c" useHWbreakpoint="false"/>
-  <Exceptions>
-   <Group group="V7M Exceptions" set="BusFault;ExceptionEntryReturnFault;HardFault;MemManage;UsageFault_CheckingError;UsageFault_Coprocessor;UsageFault_StateError"/>
-  </Exceptions>
+  <Exceptions/>
  </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBuffer>
   <FrameBufferWindow width="0" keepAspectRatio="0" zoomToFitWindow="0" showGrid="0" addressSpace="" format="0" height="0" autoEvaluate="0" scaleFactor="1" refreshPeriod="0" name="twi_sensor_pca10056_Debug" addressText="" accessByDisplayWidth="0"/>
  </FrameBuffer>
  <Memory1>
-  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="twi_sensor_pca10056_Debug" sizeText="" addressText=""/>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="twi_sensor_pca10056_Debug" sizeText="" addressText="0x4A0"/>
  </Memory1>
  <Memory2>
   <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="twi_sensor_pca10056_Debug" sizeText="" addressText=""/>
@@ -28,8 +25,6 @@
   <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="twi_sensor_pca10056_Debug" sizeText="" addressText=""/>
  </Memory4>
  <Project>
-  <ProjectSessionItem path=""/>
-  <ProjectSessionItem path=""/>
   <ProjectSessionItem path=""/>
   <ProjectSessionItem path=""/>
   <ProjectSessionItem path=""/>
@@ -56,13 +51,13 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" update="Never">
-   <Watchpoint expression="*(raw)" name="*(raw)" radix="10" linenumber="0" filename=""/>
-   <Watchpoint expression="data->x" name="data->x" radix="-1" linenumber="0" filename=""/>
-   <Watchpoint expression="data->y" name="data->y" radix="-1" linenumber="0" filename=""/>
-   <Watchpoint expression="buf" name="buf" radix="-1" linenumber="0" filename=""/>
-   <Watchpoint expression="data.x" name="data.x" radix="-1" linenumber="0" filename=""/>
-   <Watchpoint expression="data.y" name="data.y" radix="-1" linenumber="0" filename=""/>
-   <Watchpoint expression="data.z" name="data.z" radix="-1" linenumber="0" filename=""/>
+   <Watchpoint expression="*(raw)" name="*(raw)" radix="10" linenumber="0" filename="../ses"/>
+   <Watchpoint expression="data->x" name="data->x" radix="-1" linenumber="0" filename="../ses"/>
+   <Watchpoint expression="data->y" name="data->y" radix="-1" linenumber="0" filename="../ses"/>
+   <Watchpoint expression="buf" name="buf" radix="-1" linenumber="0" filename="../ses"/>
+   <Watchpoint expression="data.x" name="data.x" radix="-1" linenumber="0" filename="../ses"/>
+   <Watchpoint expression="data.y" name="data.y" radix="-1" linenumber="0" filename="../ses"/>
+   <Watchpoint expression="data.z" name="data.z" radix="-1" linenumber="0" filename="../ses"/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -75,7 +70,7 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="90" useTextEdit="1" path="../../../main.c" left="0" selected="1" top="79" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="16" y="79" useTextEdit="1" path="../../../main.c" left="0" top="55" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="8" y="75" useTextEdit="1" path="../../../../../../external/segger_rtt/SEGGER_RTT_Syscalls_SES.c" left="0" top="56" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="59" y="15" useTextEdit="1" path="flash_placement.xml" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="8" y="130" useTextEdit="1" path="../../../../../../components/boards/pca10056.h" left="0" top="111" codecName="Default"/>
@@ -93,13 +88,14 @@
   <SessionOpenFile windowGroup="DockEditLeft" x="21" y="289" useTextEdit="1" path="../../../../../../integration/nrfx/nrfx_glue.h" left="0" top="269" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="32" y="62" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/include/nrfx_twim.h" left="0" top="45" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="8" y="71" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/nrfx_common.h" left="0" top="53" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="181" useTextEdit="1" path="../../../qmcport/qmc5883l.c" left="0" top="172" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="181" useTextEdit="1" path="../../../qmcport/qmc5883l.c" left="0" top="13" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="2" y="116" useTextEdit="1" path="../../../qmcport/qmc5883l.h" left="0" top="104" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="42" useTextEdit="1" path="i2c.c" left="0" top="28" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="41" y="53" useTextEdit="1" path="i2c.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="22" y="4" useTextEdit="1" path="i2c.h" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/util/app_util_platform.h" left="0" top="96" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="71" useTextEdit="1" path="../../../../../../modules/nrfx/mdk/ses_startup_nrf52840.s" left="0" top="57" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="61" useTextEdit="1" path="../../../../../../components/libraries/util/app_util_platform.c" left="0" top="44" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="43" useTextEdit="1" path="../../../../../../components/drivers_ext/mpu6050/mpu6050.c" left="0" selected="1" top="25" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="twi_sensor_pca10056" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/home/mod/DeviceDownload/nRF5_SDK_17.1.0_ddde560/examples/myprojects/twi_sensor/qmcport" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="twi_sensor_pca10056" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/home/mod/DeviceDownload/nRF5_SDK_17.1.0_ddde560/components/drivers_ext/mpu6050" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

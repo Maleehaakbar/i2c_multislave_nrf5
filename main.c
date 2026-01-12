@@ -60,6 +60,8 @@
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
 #include "qmc5883l.h"
+#include "mpu_6050.h"
+
 
 
 
@@ -69,6 +71,7 @@
 int main(void)
 {   
     char buf[64];
+    uint8_t partid;
     /*log init*/
     APP_ERROR_CHECK(NRF_LOG_INIT(NULL));  
     NRF_LOG_DEFAULT_BACKENDS_INIT();
@@ -77,7 +80,8 @@ int main(void)
     twi_init();   
     NRF_LOG_INFO("\r\n init i2c");
     NRF_LOG_FLUSH();
-
+    
+    #if (TEST_QMC58833L)
     APP_ERROR_CHECK(qmc5883l_set_config(QMC5883L_DR_50, QMC5883L_OSR_128, QMC5883L_RNG_2));
     APP_ERROR_CHECK(qmc5883l_set_mode(QMC5883L_MODE_CONTINUOUS));
 
@@ -104,6 +108,25 @@ int main(void)
         }
  
     }
+    #endif
+   // mpu6050_init();
+   while(true)
+   {
+    nrf_delay_ms(500);
+    APP_ERROR_CHECK(mpu6050_verify_product_id(&partid));
+    if(nrf_result != NRF_SUCCESS)
+    {
+          NRF_LOG_INFO("\r\n failed to recv data.");
+          NRF_LOG_FLUSH();
+          return 1;
+    }
+    else 
+    {
+      NRF_LOG_INFO("part id is %x", partid);
+      NRF_LOG_FLUSH();
+    }
+   }
+
 }
 
 /** @} */

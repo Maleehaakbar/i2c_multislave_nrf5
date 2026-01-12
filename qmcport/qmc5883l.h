@@ -50,10 +50,6 @@
 extern "C" {
 #endif
 
-/**
- * Default I2C address
- */
-#define QMC5883L_I2C_ADDR_DEF 0x0d
 
 /**
  * Output data rate
