@@ -10,11 +10,8 @@
 #define QMC5883L_I2C_ADDR_DEF  0x0dU
 #define MPU6050_SLAVE_ADDR 0x68U
 
-#if TEST_QMC58833L
-#define SLAVE_ADDRESS  QMC5883L_I2C_ADDR_DEF
-#else
-#define SLAVE_ADDRESS  MPU6050_SLAVE_ADDR
-#endif
+void i2c_address(uint8_t addr);
+
 
 extern volatile bool m_xfer_done;
 extern uint8_t m_sample;

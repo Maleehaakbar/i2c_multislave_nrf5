@@ -70,9 +70,7 @@
  */
 int main(void)
 {   
-    char buf[64];
-    int16_t g_x,g_y,g_z;
-    int16_t a_x, a_y, a_z;
+     uint8_t part_id_1, part_id_2;
     /*log init*/
     APP_ERROR_CHECK(NRF_LOG_INIT(NULL));  
     NRF_LOG_DEFAULT_BACKENDS_INIT();
@@ -82,58 +80,25 @@ int main(void)
     NRF_LOG_INFO("\r\n init i2c");
     NRF_LOG_FLUSH();
     
-    #if (TEST_QMC58833L)
-    APP_ERROR_CHECK(qmc5883l_set_config(QMC5883L_DR_50, QMC5883L_OSR_128, QMC5883L_RNG_2));
-    APP_ERROR_CHECK(qmc5883l_set_mode(QMC5883L_MODE_CONTINUOUS));
-
+    mpu6050_init();
     while(true)
-    {
-      nrf_delay_ms(500);
-      qmc5883l_data_t data;
-        if (qmc5883l_get_data(&data) == NRF_SUCCESS)
-        {
-          snprintf(buf, sizeof(buf), "Magnetic data: X:%.2f mG, Y:%.2f mG, Z:%.2f mG",data.x, data.y, data.z);
-          NRF_LOG_INFO("%s", buf);
-        }
-        else
-        {
-            NRF_LOG_INFO("Could not read QMC5883L data\n");
-        }
-        NRF_LOG_FLUSH();
-      if (nrf_result!= NRF_SUCCESS)
-        {
-          NRF_LOG_INFO("\r\n failed to recv data.");
-          NRF_LOG_FLUSH();
-          return 1;
-        }
- 
-    }
-    #else
-   mpu6050_init();
-   while(true)
    {
+     nrf_delay_ms(500);
+     /*set i2c address of 1st slave*/
+     i2c_address(QMC5883L_I2C_ADDR_DEF);
+     APP_ERROR_CHECK(qmc5883l_get_chip_id(&part_id_1));
 
-    nrf_delay_ms(500);
-    APP_ERROR_CHECK(MPU6050_ReadGyro(&g_x, &g_y ,&g_z));
-    APP_ERROR_CHECK(MPU6050_ReadAcc(&a_x, &a_y, &a_z));
+     NRF_LOG_INFO("Chip id of magnetometer %x\n", part_id_1);
+     NRF_LOG_FLUSH();
 
-    if(nrf_result != NRF_SUCCESS)
-    {
-          NRF_LOG_INFO("\r\n failed to recv data.");
-          NRF_LOG_FLUSH();
-          return 1;
-    }
-    else 
-    {
-      NRF_LOG_INFO("\r\n gyro data %d. %d, %d", g_x, g_y, g_z);
-      NRF_LOG_FLUSH();
-      NRF_LOG_INFO("\r\n accelro data %d. %d, %d", a_x, a_y, a_z);
-      NRF_LOG_FLUSH();
-    }
+     /*set i2c address of 1st slave*/
+     i2c_address(MPU6050_SLAVE_ADDR);
+     APP_ERROR_CHECK(mpu6050_verify_product_id(&part_id_2));
+
+     NRF_LOG_INFO("Chip id of gyro %x\n", part_id_2);
+     NRF_LOG_FLUSH();
+
    }
-
-   #endif
-
 }
 
 /** @} */

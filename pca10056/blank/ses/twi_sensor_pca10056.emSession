@@ -2,9 +2,9 @@
 <session>
  <Bookmarks/>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
-  <BreakpointListItem trigger="" line="43" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="2" filename="i2c.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="89" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="4" filename="../../../main.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="97" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="42" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="2" filename="i2c.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="88" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="4" filename="../../../main.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="95" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="2" filename="../../../main.c" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="179" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" stopAll="false" group="Breakpoints" type="Breakpoint" state="2" filename="../../../qmcport/qmc5883l.c" useHWbreakpoint="false"/>
   <Exceptions/>
  </Breakpoints>
@@ -25,8 +25,6 @@
   <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="twi_sensor_pca10056_Debug" sizeText="" addressText=""/>
  </Memory4>
  <Project>
-  <ProjectSessionItem path=""/>
-  <ProjectSessionItem path=""/>
   <ProjectSessionItem path=""/>
   <ProjectSessionItem path=""/>
   <ProjectSessionItem path=""/>
@@ -70,32 +68,38 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="16" y="79" useTextEdit="1" path="../../../main.c" left="0" top="55" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="46" y="94" useTextEdit="1" path="../../../main.c" left="0" selected="1" top="83" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="8" y="75" useTextEdit="1" path="../../../../../../external/segger_rtt/SEGGER_RTT_Syscalls_SES.c" left="0" top="56" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="59" y="15" useTextEdit="1" path="flash_placement.xml" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="130" useTextEdit="1" path="../../../../../../components/boards/pca10056.h" left="0" top="111" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="135" useTextEdit="1" path="../../../../../../integration/nrfx/legacy/nrf_drv_twi.c" left="0" top="121" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="5" y="638" useTextEdit="1" path="../../../../../../integration/nrfx/legacy/nrf_drv_twi.h" left="0" top="618" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="38" y="130" useTextEdit="1" path="../../../../../../components/boards/pca10056.h" left="0" top="124" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="11" y="160" useTextEdit="1" path="../../../../../../integration/nrfx/legacy/nrf_drv_twi.c" left="0" top="153" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="148" useTextEdit="1" path="../../../../../../integration/nrfx/legacy/nrf_drv_twi.h" left="0" top="139" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="41" y="913" useTextEdit="1" path="../../../../../../components/toolchain/cmsis/include/cmsis_gcc.h" left="0" top="897" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="67" y="974" useTextEdit="1" path="../config/sdk_config.h" left="0" top="966" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="82" useTextEdit="1" path="../../../../../../components/libraries/log/nrf_log_ctrl.h" left="0" top="68" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="35" y="131" useTextEdit="1" path="../../../../../../components/libraries/util/sdk_errors.h" left="0" top="108" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="158" useTextEdit="1" path="../../../../../../components/libraries/util/sdk_errors.h" left="0" top="129" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="25" y="147" useTextEdit="1" path="../../../../../../components/libraries/util/app_error.h" left="0" top="133" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="656" useTextEdit="1" path="../../../../../../modules/nrfx/hal/nrf_gpio.h" left="0" top="656" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="847" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/src/nrfx_twim.c" left="0" top="831" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="78" y="104" useTextEdit="1" path="../../../../../../modules/nrfx/hal/nrf_gpio.h" left="0" top="94" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="93" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/src/nrfx_twim.c" left="0" top="72" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="5" y="372" useTextEdit="1" path="../../../../../../components/libraries/log/src/nrf_log_frontend.c" left="0" top="356" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="19" y="65" useTextEdit="1" path="../../../../../../components/drivers_nrf/nrf_soc_nosd/nrf_error.h" left="0" top="53" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="21" y="289" useTextEdit="1" path="../../../../../../integration/nrfx/nrfx_glue.h" left="0" top="269" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="32" y="62" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/include/nrfx_twim.h" left="0" top="45" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="8" y="71" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/nrfx_common.h" left="0" top="53" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="181" useTextEdit="1" path="../../../qmcport/qmc5883l.c" left="0" top="13" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="116" useTextEdit="1" path="../../../qmcport/qmc5883l.h" left="0" top="104" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="41" y="53" useTextEdit="1" path="i2c.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="4" useTextEdit="1" path="i2c.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="6" y="71" useTextEdit="1" path="../../../qmcport/qmc5883l.c" left="0" top="71" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="51" useTextEdit="1" path="../../../qmcport/qmc5883l.h" left="0" top="38" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="39" y="79" useTextEdit="1" path="i2c.c" left="0" top="66" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="29" y="9" useTextEdit="1" path="i2c.h" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/util/app_util_platform.h" left="0" top="96" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="71" useTextEdit="1" path="../../../../../../modules/nrfx/mdk/ses_startup_nrf52840.s" left="0" top="57" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="61" useTextEdit="1" path="../../../../../../components/libraries/util/app_util_platform.c" left="0" top="44" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="20" y="43" useTextEdit="1" path="../../../../../../components/drivers_ext/mpu6050/mpu6050.c" left="0" selected="1" top="25" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="mpu6050.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="11" y="72" useTextEdit="1" path="../../../mpu6050port/mpu_6050.c" left="0" top="51" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="25" useTextEdit="1" path="../../../mpu6050port/mpu_6050.h" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="43" y="181" useTextEdit="1" path="../../../../../../components/boards/boards.c" left="0" top="143" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="90" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/src/nrfx_uart.c" left="0" top="79" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="120" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/src/nrfx_uarte.c" left="0" top="119" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="255" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/src/nrfx_twi.c" left="0" top="244" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="twi_sensor_pca10056" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/home/mod/DeviceDownload/nRF5_SDK_17.1.0_ddde560/components/drivers_ext/mpu6050" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <EMStudioWindow activeProject="twi_sensor_pca10056" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/home/mod/DeviceDownload/nRF5_SDK_17.1.0_ddde560/examples/myprojects/twi_sensor/mpu6050port" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

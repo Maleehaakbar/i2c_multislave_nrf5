@@ -22,6 +22,8 @@ volatile bool m_xfer_done = false;
 /* Buffer for samples read from sensor. */
  uint8_t m_sample;
 
+ uint8_t current_address;
+
 
 /**
  * @brief Function for handling data from sensor.
@@ -96,7 +98,7 @@ ret_code_t write_reg(uint8_t reg, uint8_t val)
     ret_code_t err_code;
     uint8_t value[2] ={reg, val};
     m_xfer_done = false;
-    err_code = nrf_drv_twi_tx(&m_twi,SLAVE_ADDRESS, value, sizeof(value), false); 
+    err_code = nrf_drv_twi_tx(&m_twi,current_address ,value, sizeof(value), false); 
     while (m_xfer_done == false);
     return err_code;
     
@@ -109,7 +111,7 @@ ret_code_t read_reg(uint8_t reg, uint8_t *val , uint8_t size)
     m_xfer_done = false;
 
     /*init write the register address from where data will be read with repeated start*/
-    err_code = nrf_drv_twi_tx(&m_twi,SLAVE_ADDRESS,&reg, sizeof(reg), true); 
+    err_code = nrf_drv_twi_tx(&m_twi,current_address ,&reg, sizeof(reg), true); 
     APP_ERROR_CHECK(err_code);
 
     /*wait till the write transaction completes*/
@@ -119,10 +121,15 @@ ret_code_t read_reg(uint8_t reg, uint8_t *val , uint8_t size)
     m_xfer_done = false;
 
     /*init read*/
-    err_code = nrf_drv_twi_rx(&m_twi, SLAVE_ADDRESS, val, size);
+    err_code = nrf_drv_twi_rx(&m_twi, current_address , val, size);
     APP_ERROR_CHECK(err_code);
 
     /*wait until transfer is done*/
     while (m_xfer_done == false);
     return err_code;
+}
+
+void i2c_address(uint8_t addr)
+{ 
+   current_address = addr;
 }
